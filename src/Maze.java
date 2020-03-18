@@ -41,27 +41,33 @@ public class Maze {
                 currentCell.setVisited(true);
                 currentCell.setDepth(currentStack);
                 currentCell.setStep(step);
-                step++;
-                currentStack++;
+
 
                 switch (next) {
-                    case NORTH:                                 //removes connecting walls
+                    case NORTH:                                 //removes connecting walls, moves current
                         currentCell.getWall().setNorth(false);
                         maze[current.getRow() - 1][current.getColumn()].getWall().setSouth(false);
+                        current.addToRow(-1);
                         break;
                     case SOUTH:
                         currentCell.getWall().setSouth(false);
                         maze[current.getRow() + 1][current.getColumn()].getWall().setNorth(false);
+                        current.addToRow(1);
                         break;
                     case WEST:
                         currentCell.getWall().setWest(false);
                         maze[current.getRow()][current.getColumn() - 1].getWall().setEast(false);
+                        current.addToColumn(-1);
                         break;
                     case EAST:
                         currentCell.getWall().setEast(false);
                         maze[current.getRow()][current.getColumn() + 1].getWall().setWest(false);
+                        current.addToColumn(1);
                         break;
                 }
+                currentStack++;
+                step++;
+                stack[currentStack] = current;  //adds the position to the stack
             }
         } while (currentStack != 0);
 
@@ -86,7 +92,7 @@ public class Maze {
         }
 
         double sum = 0;
-        for (int i = 0; i < 3; i++) {   //finds sum of probabilities
+        for (int i = 0; i < 4; i++) {   //finds sum of probabilities
             sum += probabilites[i];
         }
 
@@ -94,7 +100,7 @@ public class Maze {
             return Direction.BACK;
         }
 
-        for (int i = 0; i < 3; i++) {   //normalizes probabilities based on sum
+        for (int i = 0; i < 4; i++) {   //normalizes probabilities based on sum
             probabilites[i] /= sum;
         }
         for (int i = 1; i < 4; i++) {       //makes probabilities cumulative
