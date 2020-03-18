@@ -1,15 +1,17 @@
 import java.util.Arrays;
 
-public class Maze {
+public class Maze
+{
     private final Cell[][] maze;
-    private Coordinate current;
     private final int width;
     private final int height;
+    private final Coordinate start;
 
-    Maze(int width, int height, Coordinate start) {
+    public Maze(int width, int height, Coordinate start)
+    {
+        this.start = start;
         this.width = width;
         this.height = height;
-        this.current = start;
         this.maze = new Cell[width][height];
 
         for (int i = 0; i < width; i++) {
@@ -19,62 +21,78 @@ public class Maze {
         }
     }
 
-    public Cell[][] getMaze() {
+    public Cell[][] getMaze()
+    {
         return maze;
     }
 
-    public void buildMaze() {
+    public void buildMaze()
+    {
         Coordinate[] stack = new Coordinate[width * height];
-        stack[0] = current;
+        stack[0] = start;
         int currentStack = 0;
         int step = 0;
 
-        do {
-            Direction next = findNext();
+        Coordinate current = start;
 
+        Cell cell = getCell(current);
+        cell.setVisited(true);
+        cell.setDepth(currentStack);
+        cell.setStep(step);
+
+        do {
+            System.out.println(this);
+            Direction next = findNext(current);
+            System.out.println(next);
+            System.out.println();
+            
             if (next == Direction.BACK) {
                 stack[currentStack] = null;
                 currentStack--;
                 current = stack[currentStack];
-            } else {
-                Cell currentCell = maze[current.getRow()][current.getColumn()];
-                currentCell.setVisited(true);
-                currentCell.setDepth(currentStack);
-                currentCell.setStep(step);
-
-
-                switch (next) {
-                    case NORTH:                                 //removes connecting walls, moves current
-                        currentCell.getWall().setNorth(false);
-                        maze[current.getRow() - 1][current.getColumn()].getWall().setSouth(false);
-                        current.addToRow(-1);
-                        break;
-                    case SOUTH:
-                        currentCell.getWall().setSouth(false);
-                        maze[current.getRow() + 1][current.getColumn()].getWall().setNorth(false);
-                        current.addToRow(1);
-                        break;
-                    case WEST:
-                        currentCell.getWall().setWest(false);
-                        maze[current.getRow()][current.getColumn() - 1].getWall().setEast(false);
-                        current.addToColumn(-1);
-                        break;
-                    case EAST:
-                        currentCell.getWall().setEast(false);
-                        maze[current.getRow()][current.getColumn() + 1].getWall().setWest(false);
-                        current.addToColumn(1);
-                        break;
-                }
+            }
+            else {
+                current = current.move(next);
                 currentStack++;
                 step++;
                 stack[currentStack] = current;  //adds the position to the stack
+
+                switch (next) {
+                    case NORTH:                                 //removes connecting walls, moves current
+                        cell.getWall().setNorth(false);
+                        getCell(current).getWall().setSouth(false);
+                        break;
+                    case SOUTH:
+                        cell.getWall().setSouth(false);
+                        getCell(current).getWall().setNorth(false);
+                        break;
+                    case WEST:
+                        cell.getWall().setWest(false);
+                        getCell(current).getWall().setEast(false);
+                        break;
+                    case EAST:
+                        cell.getWall().setEast(false);
+                        getCell(current).getWall().setWest(false);
+                        break;
+                }
+
+                cell = getCell(current);
+                cell.setVisited(true);
+                cell.setDepth(currentStack);
+                cell.setStep(step);
             }
-        } while (currentStack != 0);
-
-
+        }
+        while (currentStack != 0);
     }
 
-    private Direction findNext() {
+    private Cell getCell(Coordinate coordinate)
+    {
+        return maze[coordinate.getRow()][coordinate.getColumn()];
+    }
+
+    private Direction findNext(Coordinate current)
+    {
+        System.out.println(current);
         double[] probabilites = new double[4];
         Arrays.fill(probabilites, 0.25);
 
@@ -111,16 +129,31 @@ public class Maze {
 
         if (randVal < probabilites[0]) {
             return Direction.NORTH;
-        } else if (randVal < probabilites[1]) {
+        }
+        else if (randVal < probabilites[1]) {
             return Direction.SOUTH;
-        } else if (randVal < probabilites[2]) {
+        }
+        else if (randVal < probabilites[2]) {
             return Direction.WEST;
-        } else {
+        }
+        else {
             return Direction.EAST;
         }
     }
+
+    @Override
+    public String toString()
+    {
+        StringBuilder builder = new StringBuilder();
+        for (int row = 0; row < height; row++) {
+            for (int column = 0; column < width; column++) {
+                builder.append(String.format("%2d", maze[row][column].getStep()));
+                builder.append(" ");
+            }
+            builder.append("\n");
+        }
+
+        return builder.toString();
+    }
 }
 
-enum Direction {
-    NORTH, SOUTH, WEST, EAST, BACK
-}
