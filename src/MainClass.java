@@ -11,7 +11,14 @@ public class MainClass
     public static void main(String[] args)
             throws IOException
     {
-        Maze maze = new Maze(20, 20, new Coordinate(0, 0));
+        int width = 20;
+        int height = 20;
+
+        if (args.length == 2) {
+            width = Integer.parseInt(args[0]);
+            height = Integer.parseInt(args[1]);
+        }
+        Maze maze = new Maze(width, height, new Coordinate(0, 0));
         maze.buildMaze();
         System.out.println(maze);
 
