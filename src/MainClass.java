@@ -22,6 +22,7 @@ public class MainClass
         ImageIO.write(img, "PNG", new File("maze.png"));
 
         JFrame frame = new JFrame();
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(800, 800);
         frame.getContentPane().setLayout(new FlowLayout());
         frame.getContentPane().add(new JLabel(new ImageIcon(img)));
