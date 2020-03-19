@@ -8,16 +8,17 @@ public class Maze
 
     private final int height;
     private final Coordinate start;
+
     public Maze(int width, int height, Coordinate start)
     {
         this.start = start;
         this.width = width;
         this.height = height;
-        this.maze = new Cell[width][height];
+        this.maze = new Cell[height][width];
 
-        for (int i = 0; i < width; i++) {
-            for (int j = 0; j < height; j++) {
-                this.maze[i][j] = new Cell(new Wall(), false);
+        for (int column = 0; column < width; column++) {
+            for (int row = 0; row < height; row++) {
+                this.maze[row][column] = new Cell(new Wall(), false);
             }
         }
     }
