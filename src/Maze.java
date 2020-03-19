@@ -3,10 +3,11 @@ import java.util.Arrays;
 public class Maze
 {
     private final Cell[][] maze;
+
     private final int width;
+
     private final int height;
     private final Coordinate start;
-
     public Maze(int width, int height, Coordinate start)
     {
         this.start = start;
@@ -16,7 +17,7 @@ public class Maze
 
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
-                this.maze[i][j] = new Cell(Wall.DEFAULT, false);
+                this.maze[i][j] = new Cell(new Wall(), false);
             }
         }
     }
@@ -41,11 +42,11 @@ public class Maze
         cell.setStep(step);
 
         do {
-            System.out.println(this);
+//            System.out.println(this);
             Direction next = findNext(current);
-            System.out.println(next);
-            System.out.println();
-            
+//            System.out.println(next);
+//            System.out.println();
+
             if (next == Direction.BACK) {
                 stack[currentStack] = null;
                 currentStack--;
@@ -85,9 +86,19 @@ public class Maze
         while (currentStack != 0);
     }
 
-    private Cell getCell(Coordinate coordinate)
+    public Cell getCell(Coordinate coordinate)
     {
         return maze[coordinate.getRow()][coordinate.getColumn()];
+    }
+
+    public int getWidth()
+    {
+        return width;
+    }
+
+    public int getHeight()
+    {
+        return height;
     }
 
     private Direction findNext(Coordinate current)
@@ -147,7 +158,7 @@ public class Maze
         StringBuilder builder = new StringBuilder();
         for (int row = 0; row < height; row++) {
             for (int column = 0; column < width; column++) {
-                builder.append(String.format("%2d", maze[row][column].getStep()));
+                builder.append(String.format("%3d", maze[row][column].getStep()));
                 builder.append(" ");
             }
             builder.append("\n");

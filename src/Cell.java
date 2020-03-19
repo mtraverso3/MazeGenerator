@@ -1,6 +1,6 @@
 public class Cell {
 
-    private Wall wall;
+    private final Wall wall;
     private int step;
     private int depth;
     private boolean visited;
@@ -10,9 +10,6 @@ public class Cell {
         this.visited = visited;
     }
 
-    public void setWall(Wall wall) {
-        this.wall = wall;
-    }
 
     public Wall getWall() {
         return wall;

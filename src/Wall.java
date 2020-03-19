@@ -1,20 +1,21 @@
-public class Wall {
-    public static final Wall DEFAULT = new Wall(true, true, true, true);
+public class Wall
+{
+    private boolean north = true;
 
-    private boolean north;
+    private boolean south = true;
+    private boolean west = true;
+    private boolean east = true;
 
-    private boolean south;
-    private boolean west;
-    private boolean east;
-
-    public Wall(boolean north, boolean south, boolean west, boolean east) {
+    public Wall(boolean north, boolean south, boolean west, boolean east)
+    {
         this.north = north;
         this.south = south;
         this.west = west;
         this.east = east;
     }
 
-    public Wall() {
+    public Wall()
+    {
     }
 
     public boolean getNorth() {
