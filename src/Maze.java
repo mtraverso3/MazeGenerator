@@ -106,7 +106,6 @@ public class Maze
 
     private Direction findNext(Coordinate current)
     {
-//        System.out.println(current);
         double[] probabilites = new double[4];
         Arrays.fill(probabilites, 0.25);
 
