@@ -29,25 +29,36 @@ public class ImageGenerator
         for (int row = 0; row < maze.getHeight(); row++) {
             for (int column = 0; column < maze.getWidth(); column++) {
                 Coordinate current = new Coordinate(row, column);
+
                 if (maze.getCell(current).getWall().getNorth()) {
                     int x1 = column * (cellSize - 1);
                     int y1 = row * (cellSize - 1);
                     int x2 = (column + 1) * (cellSize - 1);
                     int y2 = y1;
-
-//                    System.out.println(String.format("(%s, %s) -> (%s, %s)", x1, y1, x2, y2));
                     graphics.drawLine(x1, y1, x2, y2);
-//                    graphics.fillRect(column * (cellSize - 1), row * (cellSize - 1), cellSize, 1);
                 }
                 if (maze.getCell(current).getWall().getSouth()) {
-                    graphics.fillRect(column * (cellSize - 1), row * (cellSize - 1) + (cellSize - 1), cellSize, 1);
+                    int x1 = column * (cellSize - 1);
+                    int y1 = (row + 1) * (cellSize - 1);
+                    int x2 = (column + 1) * (cellSize - 1);
+                    int y2 = y1;
+                    graphics.drawLine(x1, y1, x2, y2);
                 }
                 if (maze.getCell(current).getWall().getWest()) {
-                    graphics.fillRect(column * (cellSize - 1), row * (cellSize - 1), 1, cellSize);
+                    int x1 = column * (cellSize - 1);
+                    int y1 = row * (cellSize - 1);
+                    int x2 = x1;
+                    int y2 = (row + 1) * (cellSize - 1);
+                    graphics.drawLine(x1, y1, x2, y2);
                 }
                 if (maze.getCell(current).getWall().getEast()) {
-                    graphics.fillRect(column * (cellSize - 1) + (cellSize - 1), row * (cellSize - 1), 1, cellSize);
+                    int x1 = (column + 1) * (cellSize - 1);
+                    int y1 = row * (cellSize - 1);
+                    int x2 = x1;
+                    int y2 = (row + 1) * (cellSize - 1);
+                    graphics.drawLine(x1, y1, x2, y2);
                 }
+
             }
         }
         return img;
