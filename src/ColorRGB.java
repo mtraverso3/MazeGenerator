@@ -1,7 +1,7 @@
 import java.awt.Color;
 
 public class ColorRGB
-        extends Color
+
 {
 
     private final int red;
@@ -10,7 +10,6 @@ public class ColorRGB
 
     ColorRGB(int red, int green, int blue)
     {
-        super(red, green, blue);
         this.red = red;
         this.green = green;
         this.blue = blue;
@@ -29,6 +28,11 @@ public class ColorRGB
     public int getBlue()
     {
         return blue;
+    }
+
+    public Color getColor()
+    {
+        return new Color(red, green, blue);
     }
 
     public ColorHSV getHSV()

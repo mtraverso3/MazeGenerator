@@ -124,12 +124,12 @@ public class ImageGenerator
         for (int row = 0; row < maze.getHeight(); row++) {
             for (int column = 0; column < maze.getWidth(); column++) {
                 ColorRGB color = new ColorHSV((int) Math.round(maze.getCell(new Coordinate(row, column)).getDepth() / maxDepth * 300), 1, 1).getRGB();
-                g.setPaint(color);
+                g.setPaint(color.getColor());
                 g.fillRect(column * (size * 2) + 1, row * (size * 2) + 1, size * 2, size * 2);
             }
         }
 
-        img = mazeBW(img);
+        img = mazeBW(img);  //lines
         return img;
     }
 }
