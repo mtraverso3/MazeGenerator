@@ -20,7 +20,7 @@ public class MainClass
         }
         Maze maze = new Maze(width, height, new Coordinate(0, 0));
         maze.buildMaze();
-        System.out.println(maze);
+//        System.out.println(maze);
 
         BufferedImage img = new ImageGenerator(maze).mazeBW(7);
 
@@ -28,7 +28,7 @@ public class MainClass
 
         JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(800, 800);
+//        frame.setSize(800, 800);
         frame.getContentPane().add(new ScaledImageLabel(new ImageIcon(img)));
         frame.pack();
         frame.setVisible(true);
