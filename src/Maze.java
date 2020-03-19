@@ -52,6 +52,8 @@ public class Maze
                 stack[currentStack] = null;
                 currentStack--;
                 current = stack[currentStack];
+
+                cell = getCell(current);
             }
             else {
                 current = current.move(next);
