@@ -21,7 +21,7 @@ public class MainClass
         Maze maze = new Maze(width, height, new Coordinate(0, 0));
         maze.buildMaze();
 
-        BufferedImage img = new ImageGenerator(maze, 7).mazeRgbDepth();
+        BufferedImage img = new ImageGenerator(maze, 7).mazeRgbStep();
 
         ImageIO.write(img, "PNG", new File("maze.png"));
 

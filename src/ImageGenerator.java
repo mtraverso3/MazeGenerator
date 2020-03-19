@@ -117,13 +117,31 @@ public class ImageGenerator
     {
         int cellSize = size * 2 + 1;
         BufferedImage img = new BufferedImage(maze.getWidth() * (cellSize - 1) + 1, maze.getHeight() * (cellSize - 1) + 1, BufferedImage.TYPE_INT_RGB);
-        //gets a maze image from mazeBW() and converts it to RGB
 
         Graphics2D g = img.createGraphics();
         double maxDepth = maze.getMaxDepth();
         for (int row = 0; row < maze.getHeight(); row++) {
             for (int column = 0; column < maze.getWidth(); column++) {
                 ColorRGB color = new ColorHSV((int) Math.round(maze.getCell(new Coordinate(row, column)).getDepth() / maxDepth * 300), 1, 1).getRGB();
+                g.setPaint(color.getColor());
+                g.fillRect(column * (size * 2) + 1, row * (size * 2) + 1, size * 2, size * 2);
+            }
+        }
+
+        img = mazeBW(img);  //lines
+        return img;
+    }
+
+    public BufferedImage mazeRgbStep()
+    {
+        int cellSize = size * 2 + 1;
+        BufferedImage img = new BufferedImage(maze.getWidth() * (cellSize - 1) + 1, maze.getHeight() * (cellSize - 1) + 1, BufferedImage.TYPE_INT_RGB);
+
+        Graphics2D g = img.createGraphics();
+        double maxStep = maze.getMaxStep();
+        for (int row = 0; row < maze.getHeight(); row++) {
+            for (int column = 0; column < maze.getWidth(); column++) {
+                ColorRGB color = new ColorHSV((int) Math.round(maze.getCell(new Coordinate(row, column)).getStep() / maxStep * 300), 1, 1).getRGB();
                 g.setPaint(color.getColor());
                 g.fillRect(column * (size * 2) + 1, row * (size * 2) + 1, size * 2, size * 2);
             }
