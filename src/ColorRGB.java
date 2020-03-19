@@ -1,28 +1,38 @@
-public class ColorRGB {
+import java.awt.Color;
+
+public class ColorRGB
+        extends Color
+{
 
     private final int red;
     private final int green;
     private final int blue;
 
-    ColorRGB(int red, int green, int blue) {
+    ColorRGB(int red, int green, int blue)
+    {
+        super(red, green, blue);
         this.red = red;
         this.green = green;
         this.blue = blue;
     }
 
-    public int getRed() {
+    public int getRed()
+    {
         return red;
     }
 
-    public int getGreen() {
+    public int getGreen()
+    {
         return green;
     }
 
-    public int getBlue() {
+    public int getBlue()
+    {
         return blue;
     }
 
-    public ColorHSV getHSV() {
+    public ColorHSV getHSV()
+    {
         double h = -1;
         double s;
         double v;
@@ -35,17 +45,21 @@ public class ColorRGB {
 
         if (cMax == cMin) {
             h = 0;
-        } else if (cMax == r) {
+        }
+        else if (cMax == r) {
             h = (60 * ((g - b) / diff) + 360) % 360;
-        } else if (cMax == g) {
+        }
+        else if (cMax == g) {
             h = (60 * ((b - r) / diff) + 120) % 360;
-        } else if (cMax == b) {
+        }
+        else if (cMax == b) {
             h = (60 * ((r - g) / diff) + 240) % 360;
         }
 
         if (cMax == 0) {
             s = 0;
-        } else {
+        }
+        else {
             s = (diff / cMax);
         }
         v = cMax;

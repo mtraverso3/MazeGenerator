@@ -3,11 +3,10 @@ import java.util.Arrays;
 public class Maze
 {
     private final Cell[][] maze;
+    private final Coordinate start;
 
     private final int width;
-
     private final int height;
-    private final Coordinate start;
 
     public Maze(int width, int height, Coordinate start)
     {
@@ -21,11 +20,6 @@ public class Maze
                 this.maze[row][column] = new Cell(new Wall(), false);
             }
         }
-    }
-
-    public Cell[][] getMaze()
-    {
-        return maze;
     }
 
     public void buildMaze()
@@ -89,21 +83,6 @@ public class Maze
         while (currentStack != 0);
     }
 
-    public Cell getCell(Coordinate coordinate)
-    {
-        return maze[coordinate.getRow()][coordinate.getColumn()];
-    }
-
-    public int getWidth()
-    {
-        return width;
-    }
-
-    public int getHeight()
-    {
-        return height;
-    }
-
     private Direction findNext(Coordinate current)
     {
         double[] probabilites = new double[4];
@@ -152,6 +131,48 @@ public class Maze
         else {
             return Direction.EAST;
         }
+    }
+
+    public Cell[][] getMaze()
+    {
+        return maze;
+    }
+
+    public Cell getCell(Coordinate coordinate)
+    {
+        return maze[coordinate.getRow()][coordinate.getColumn()];
+    }
+
+    public int getWidth()
+    {
+        return width;
+    }
+
+    public int getHeight()
+    {
+        return height;
+    }
+
+    public int getMaxDepth()
+    {
+        int max = 0;
+        for (int row = 0; row < height; row++) {
+            for (int column = 0; column < width; column++) {
+                max = Math.max(maze[row][column].getDepth(), max);
+            }
+        }
+        return max;
+    }
+
+    public int getMaxStep()
+    {
+        int max = 0;
+        for (int row = 0; row < height; row++) {
+            for (int column = 0; column < width; column++) {
+                max = Math.max(maze[row][column].getStep(), max);
+            }
+        }
+        return max;
     }
 
     @Override
