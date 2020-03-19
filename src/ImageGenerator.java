@@ -15,7 +15,7 @@ public class ImageGenerator
     public BufferedImage mazeBW(int size)
     {
         int cellSize = size * 2 + 1;
-        BufferedImage img = new BufferedImage(maze.getWidth() * (cellSize), maze.getHeight() * (cellSize), BufferedImage.TYPE_BYTE_BINARY);
+        BufferedImage img = new BufferedImage(maze.getWidth() * (cellSize - 1) + 1, maze.getHeight() * (cellSize - 1) + 1, BufferedImage.TYPE_BYTE_BINARY);
         Graphics2D graphics = img.createGraphics();
 
         RenderingHints hints = new RenderingHints(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_PURE);
