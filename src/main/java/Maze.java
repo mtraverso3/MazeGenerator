@@ -20,9 +20,10 @@ public class Maze
                 this.maze[row][column] = new Cell(new Wall(), false);
             }
         }
+        this.buildMaze();
     }
 
-    public void buildMaze()
+    private void buildMaze()
     {
         Coordinate[] stack = new Coordinate[width * height];
         stack[0] = start;

@@ -19,12 +19,16 @@ public class MainClass
             height = Integer.parseInt(args[1]);
         }
         Maze maze = new Maze(width, height, new Coordinate(0, 0));
-        maze.buildMaze();
 
-        BufferedImage img = new ImageGenerator(maze, 7).mazeRgbStep();
+        BufferedImage img = new ImageGenerator(maze, 7).mazeRgbDepth();
 
         ImageIO.write(img, "PNG", new File("maze.png"));
 
+        ShowImage(img);
+    }
+
+    private static void ShowImage(BufferedImage img)
+    {
         JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().add(new ScaledImageLabel(new ImageIcon(img)));
