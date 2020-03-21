@@ -1,18 +1,21 @@
 import java.util.Arrays;
+import java.util.Random;
 
 public class Maze
 {
+    private final Random random;
     private final Cell[][] maze;
     private final Coordinate start;
 
     private final int width;
     private final int height;
 
-    public Maze(int width, int height, Coordinate start)
+    public Maze(int width, int height, Coordinate start, Random random)
     {
         this.start = start;
         this.width = width;
         this.height = height;
+        this.random = random;
         this.maze = new Cell[height][width];
 
         for (int column = 0; column < width; column++) {
@@ -118,7 +121,7 @@ public class Maze
             probabilites[i] = probabilites[i - 1] + probabilites[i];
         }
 
-        double randVal = Math.random();
+        double randVal = random.nextDouble();
 
         if (randVal < probabilites[0]) {
             return Direction.NORTH;
