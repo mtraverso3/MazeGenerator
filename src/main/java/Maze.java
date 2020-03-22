@@ -26,6 +26,10 @@ public class Maze
         this.buildMaze();
     }
 
+    /**
+     * This method builds the maze.
+     * It uses a depth-first-search algorithm to build it.
+     */
     private void buildMaze()
     {
         Coordinate[] stack = new Coordinate[width * height];
@@ -41,12 +45,9 @@ public class Maze
         cell.setStep(step);
 
         do {
-//            System.out.println(this);
             Direction next = findNext(current);
-//            System.out.println(next);
-//            System.out.println();
 
-            if (next == Direction.BACK) {
+            if (next == Direction.BACK) {   //Backtracks and sets the stack variables
                 stack[currentStack] = null;
                 currentStack--;
                 current = stack[currentStack];
@@ -59,8 +60,8 @@ public class Maze
                 step++;
                 stack[currentStack] = current;  //adds the position to the stack
 
-                switch (next) {
-                    case NORTH:                                 //removes connecting walls, moves current
+                switch (next) {         //removes the connecting walls
+                    case NORTH:
                         cell.getWall().setNorth(false);
                         getCell(current).getWall().setSouth(false);
                         break;
@@ -87,6 +88,12 @@ public class Maze
         while (currentStack != 0);
     }
 
+    /**
+     * This method checks the surrounding cells and checks if they have been visited.
+     * A random direction is returned out of the unvisited directions.
+     *
+     * @param current The base coordinate to use for checking
+     */
     private Direction findNext(Coordinate current)
     {
         double[] probabilites = new double[4];
@@ -122,7 +129,6 @@ public class Maze
         }
 
         double randVal = random.nextDouble();
-
         if (randVal < probabilites[0]) {
             return Direction.NORTH;
         }
@@ -157,6 +163,9 @@ public class Maze
         return height;
     }
 
+    /**
+     * Gets the maximum distance from the start in the maze
+     */
     public int getMaxDepth()
     {
         int max = 0;
@@ -168,6 +177,9 @@ public class Maze
         return max;
     }
 
+    /**
+     * Gets the highest step value in the maze.
+     */
     public int getMaxStep()
     {
         int max = 0;
