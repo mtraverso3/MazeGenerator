@@ -1,36 +1,46 @@
-public class ColorHSV {
+/**
+ * This class represents a Hue-Saturation-Value color.
+ * It includes a method to convert to a RGB color.
+ *
+ * @author Marcos Traverso
+ */
+public class ColorHSV
+{
     private final int hue;
     private final double saturation;
     private final double value;
 
-    ColorHSV(int hue, double saturation, double value) {
+    ColorHSV(int hue, double saturation, double value)
+    {
         this.hue = hue;
         this.saturation = saturation;
         this.value = value;
     }
 
-    public int getHue() {
+    public int getHue()
+    {
         return hue;
     }
 
-    public double getSaturation() {
+    public double getSaturation()
+    {
         return saturation;
     }
 
-    public double getValue() {
+    public double getValue()
+    {
         return value;
     }
 
-    public ColorRGB getRGB() {
-        double h = this.hue;
-        double s = this.saturation;
+    public ColorRGB getRGB()
+    {
         double v = this.value;
         double r = 0;
         double g = 0;
         double b = 0;
 
-        double chroma = s * v;
-        double hueRange = h / 60.0;
+        double chroma = this.saturation * v;
+        double hueRange = this.hue / 60.0;
         double x = chroma * (1 - Math.abs((hueRange % 2) - 1));
 
         switch ((int) hueRange) {
@@ -74,5 +84,4 @@ public class ColorHSV {
 
         return new ColorRGB((int) r, (int) g, (int) b);
     }
-
 }

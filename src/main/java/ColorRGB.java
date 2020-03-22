@@ -1,9 +1,13 @@
 import java.awt.Color;
 
+/**
+ * This class represents a RGB color.
+ * It includes a method to convert to a HSV color.
+ *
+ * @author Marcos Traverso
+ */
 public class ColorRGB
-
 {
-
     private final int red;
     private final int green;
     private final int blue;
@@ -66,7 +70,9 @@ public class ColorRGB
         else {
             s = (diff / cMax);
         }
+
         v = cMax;
+
         return new ColorHSV((int) h, s, v);
     }
 }
