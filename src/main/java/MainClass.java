@@ -13,14 +13,15 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
+
 /**
  * <h1>Maze Generator</h1>
  * This maze generation program generates completely unique/random mazes.
  * It uses a depth-first search algorithm to build the maze.
  * The program can display and output the maze as an image.
  *
- * @author  Marcos Traverso
- * @since   2020-03-22
+ * @author Marcos Traverso
+ * @since 2020-03-22
  */
 public class MainClass
 {
@@ -40,7 +41,6 @@ public class MainClass
         }
 
         Maze maze = new Maze(command.width, command.height, new Coordinate(0, 0), new Random(seed));
-
 
         BufferedImage img;      //generates an image based on the type picked
         switch (command.type) {
@@ -69,7 +69,8 @@ public class MainClass
     }
 
     /**
-     *This method displays a scalable image with JFrame.
+     * This method displays a scalable image with JFrame.
+     *
      * @param img The image to be displayed
      */
     private static void ShowImage(BufferedImage img)
@@ -103,7 +104,7 @@ public class MainClass
         @Option(name = {"-t", "--type"}, description = "Sets the type of image generated", allowedValues = {"BW", "RgbDepth", "RgbStep"})
         public String type = "BW";
 
-        @Option(name = {"-cw, ","--cellwidth"}, description = "Sets the pixel width of each cell in the image.", hidden = true)
+        @Option(name = {"-cw, ", "--cellwidth"}, description = "Sets the pixel width of each cell in the image.", hidden = true)
         public int size = 5;
     }
 }

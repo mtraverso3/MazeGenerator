@@ -23,15 +23,17 @@ import java.awt.Graphics;
  * the ImageDrawer utility.
  *
  * @author www.codejava.net
- *
  */
-public class ScaledImageLabel extends JLabel {
+public class ScaledImageLabel
+        extends JLabel
+{
     public ScaledImageLabel(Icon image)
     {
         super(image);
     }
 
-    protected void paintComponent(Graphics g) {
+    protected void paintComponent(Graphics g)
+    {
         ImageIcon icon = (ImageIcon) getIcon();
         if (icon != null) {
             ImageDrawer.drawScaledImage(icon.getImage(), this, g);

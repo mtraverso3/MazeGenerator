@@ -24,35 +24,43 @@ public class Wall
     {
     }
 
-    public boolean getNorth() {
+    public boolean getNorth()
+    {
         return north;
     }
 
-    public boolean getSouth() {
+    public boolean getSouth()
+    {
         return south;
     }
 
-    public boolean getWest() {
+    public boolean getWest()
+    {
         return west;
     }
 
-    public boolean getEast() {
+    public boolean getEast()
+    {
         return east;
     }
 
-    public void setNorth(boolean north) {
+    public void setNorth(boolean north)
+    {
         this.north = north;
     }
 
-    public void setSouth(boolean south) {
+    public void setSouth(boolean south)
+    {
         this.south = south;
     }
 
-    public void setWest(boolean west) {
+    public void setWest(boolean west)
+    {
         this.west = west;
     }
 
-    public void setEast(boolean east) {
+    public void setEast(boolean east)
+    {
         this.east = east;
     }
 }

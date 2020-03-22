@@ -14,7 +14,6 @@ public class ImageGenerator
     }
 
     /**
-     *
      * @return A black and white BufferedImage of the maze
      */
     public BufferedImage mazeBW()
