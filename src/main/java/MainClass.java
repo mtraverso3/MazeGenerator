@@ -45,13 +45,13 @@ public class MainClass
         BufferedImage img;      //generates an image based on the type picked
         switch (command.type) {
             case "BW":
-                img = new ImageGenerator(maze, 7).mazeBW();
+                img = new ImageGenerator(maze, command.size).mazeBW();
                 break;
             case "RgbDepth":
-                img = new ImageGenerator(maze, 7).mazeRgbDepth();
+                img = new ImageGenerator(maze, command.size).mazeRgbDepth();
                 break;
             case "RgbStep":
-                img = new ImageGenerator(maze, 7).mazeRgbStep();
+                img = new ImageGenerator(maze, command.size).mazeRgbStep();
                 break;
             default:
                 throw new UnsupportedOperationException();
@@ -102,5 +102,8 @@ public class MainClass
 
         @Option(name = {"-t", "--type"}, description = "Sets the type of image generated", allowedValues = {"BW", "RgbDepth", "RgbStep"})
         public String type = "BW";
+
+        @Option(name = {"-cw, ","--cellwidth"}, description = "Sets the pixel width of each cell in the image.", hidden = true)
+        public int size = 5;
     }
 }
