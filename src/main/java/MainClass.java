@@ -98,7 +98,7 @@ public class MainClass
         @Option(name = {"-f", "--file"}, description = "Outputs the maze to a PNG file.")
         public String file;
 
-        @Option(name = {"-s", "--seed"}, description = "Random number generator seed")
+        @Option(name = {"-s", "--seed"}, description = "Random number generator seed. NOTE: Same width and height must be used to reproduce a maze.")
         public Long seed;
 
         @Option(name = {"-t", "--type"}, description = "Sets the type of image generated", allowedValues = {"BW", "RgbDepth", "RgbStep"})

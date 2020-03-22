@@ -80,7 +80,7 @@ public class ImageGenerator
      */
     public BufferedImage mazeRgbDepth()
     {
-        return renderMaze((maze, cell) ->  new ColorHSV((int) Math.round(cell.getDepth() * 1.0 / maze.getMaxDepth() * 300), 1, 1).getRGB().getColor());
+        return renderMaze((maze, cell) -> new ColorHSV((int) Math.round(cell.getDepth() * 1.0 / maze.getMaxDepth() * 300), 1, 1).getRGB().getColor());
     }
 
     /**
@@ -90,7 +90,6 @@ public class ImageGenerator
     {
         return renderMaze((maze, cell) -> new ColorHSV((int) Math.round(cell.getStep() * 1.0 / maze.getMaxStep() * 300), 1, 1).getRGB().getColor());
     }
-
 
     private BufferedImage renderMaze(ColorCalculator colorCalculator)
     {
@@ -106,7 +105,7 @@ public class ImageGenerator
             }
         }
 
-        //draws the maze lines over the image using mazeBW()
+        //draws the maze lines over the image using drawMazeGrid()
         return drawMazeGrid(img);
     }
 
@@ -114,7 +113,4 @@ public class ImageGenerator
     {
         Color computeColor(Maze maze, Cell cell);
     }
-
-
-
 }
