@@ -13,14 +13,15 @@ public class ImageGenerator
         this.size = size;
     }
 
+    /**
+     *
+     * @return A black and white BufferedImage of the maze
+     */
     public BufferedImage mazeBW()
     {
         int cellSize = size * 2 + 1;
         BufferedImage img = new BufferedImage(maze.getWidth() * (cellSize - 1) + 1, maze.getHeight() * (cellSize - 1) + 1, BufferedImage.TYPE_BYTE_BINARY);
         Graphics2D graphics = img.createGraphics();
-
-//        RenderingHints hints = new RenderingHints(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_PURE);
-//        graphics.setRenderingHints(hints);
 
         graphics.setPaint(Color.WHITE);
         graphics.fillRect(0, 0, img.getWidth(), img.getHeight());
@@ -64,13 +65,16 @@ public class ImageGenerator
         return img;
     }
 
+    /**
+     * This method will draw the black maze lines over the given image.
+     *
+     * @param img Image to use as a base
+     * @return A BufferedImage with maze lines drawn on it
+     */
     private BufferedImage mazeBW(BufferedImage img)
     {
         int cellSize = size * 2 + 1;
         Graphics2D graphics = img.createGraphics();
-
-//        RenderingHints hints = new RenderingHints(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_PURE);
-//        graphics.setRenderingHints(hints);
 
         graphics.setPaint(Color.BLACK);
 
@@ -111,6 +115,10 @@ public class ImageGenerator
         return img;
     }
 
+    /**
+     * This method generates an image with hue based on the distance from the start.
+     * It will draw the colored rectangles and paint the black maze lines afterward.
+     */
     public BufferedImage mazeRgbDepth()
     {
         int cellSize = size * 2 + 1;
@@ -120,16 +128,22 @@ public class ImageGenerator
         double maxDepth = maze.getMaxDepth();
         for (int row = 0; row < maze.getHeight(); row++) {
             for (int column = 0; column < maze.getWidth(); column++) {
+                //fills the image with rectangles with hue based on distance from start'step'
                 ColorRGB color = new ColorHSV((int) Math.round(maze.getCell(new Coordinate(row, column)).getDepth() / maxDepth * 300), 1, 1).getRGB();
                 g.setPaint(color.getColor());
                 g.fillRect(column * (size * 2) + 1, row * (size * 2) + 1, size * 2, size * 2);
             }
         }
 
-        img = mazeBW(img);  //lines
+        //draws the maze lines over the image using mazeBW()
+        img = mazeBW(img);
         return img;
     }
 
+    /**
+     * This method generates an image with hue based on the order visited by the generator(step).
+     * It will draw the colored rectangles and paint the black maze lines afterward.
+     */
     public BufferedImage mazeRgbStep()
     {
         int cellSize = size * 2 + 1;
@@ -139,13 +153,15 @@ public class ImageGenerator
         double maxStep = maze.getMaxStep();
         for (int row = 0; row < maze.getHeight(); row++) {
             for (int column = 0; column < maze.getWidth(); column++) {
+                //fills the image with rectangles with hue based on 'step'
                 ColorRGB color = new ColorHSV((int) Math.round(maze.getCell(new Coordinate(row, column)).getStep() / maxStep * 300), 1, 1).getRGB();
                 g.setPaint(color.getColor());
                 g.fillRect(column * (size * 2) + 1, row * (size * 2) + 1, size * 2, size * 2);
             }
         }
 
-        img = mazeBW(img);  //lines
+        //draws the maze lines over the image using mazeBW()
+        img = mazeBW(img);
         return img;
     }
 }
