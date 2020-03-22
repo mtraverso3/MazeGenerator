@@ -104,7 +104,7 @@ public class MainClass
         @Option(name = {"-t", "--type"}, description = "Sets the type of image generated", allowedValues = {"BW", "RgbDepth", "RgbStep"})
         public String type = "BW";
 
-        @Option(name = {"-cw, ", "--cellwidth"}, description = "Sets the pixel width of each cell in the image.", hidden = true)
+        @Option(name = {"-cw, ", "--cellwidth"}, description = "Sets the pixel width of each cell in the image.")
         public int size = 5;
     }
 }
