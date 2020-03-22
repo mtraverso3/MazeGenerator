@@ -1,3 +1,9 @@
+/**
+ * This class represents a cell's walls.
+ * It stores booleans representing whether a wall exists or not in each direction.
+ *
+ * @author Marcos Traverso
+ */
 public class Wall
 {
     private boolean north = true;
