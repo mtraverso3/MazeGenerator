@@ -35,27 +35,18 @@ public class MainClass
         }
 
         long seed = ThreadLocalRandom.current().nextLong();
-        Random random;
         if (command.seed != null) {         //Sets seed if provided
             seed = command.seed;
         }
 
         Maze maze = new Maze(command.width, command.height, new Coordinate(0, 0), new Random(seed));
 
-        BufferedImage img;      //generates an image based on the type picked
-        switch (command.type) {
-            case "BW":
-                img = new ImageGenerator(maze, command.size).mazeBW();
-                break;
-            case "RgbDepth":
-                img = new ImageGenerator(maze, command.size).mazeRgbDepth();
-                break;
-            case "RgbStep":
-                img = new ImageGenerator(maze, command.size).mazeRgbStep();
-                break;
-            default:
-                throw new UnsupportedOperationException();
-        }
+        BufferedImage img = switch (command.type) {
+            case "BW" -> new ImageGenerator(maze, command.size).mazeBW();
+            case "RgbDepth" -> new ImageGenerator(maze, command.size).mazeRgbDepth();
+            case "RgbStep" -> new ImageGenerator(maze, command.size).mazeRgbStep();
+            default -> throw new UnsupportedOperationException();
+        };
 
         if (command.file != null) {
             ImageIO.write(img, "PNG", new File(command.file));

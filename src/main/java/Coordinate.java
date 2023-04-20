@@ -13,18 +13,13 @@ public record Coordinate(int row, int column)
      */
     public Coordinate move(Direction direction)
     {
-        switch (direction) {
-            case NORTH:
-                return new Coordinate(row - 1, column);
-            case SOUTH:
-                return new Coordinate(row + 1, column);
-            case WEST:
-                return new Coordinate(row, column - 1);
-            case EAST:
-                return new Coordinate(row, column + 1);
-            default:
-                throw new IllegalArgumentException();
-        }
+        return switch (direction) {
+            case NORTH -> new Coordinate(row - 1, column);
+            case SOUTH -> new Coordinate(row + 1, column);
+            case WEST -> new Coordinate(row, column - 1);
+            case EAST -> new Coordinate(row, column + 1);
+            case BACK -> throw new IllegalArgumentException();
+        };
     }
 
     @Override
