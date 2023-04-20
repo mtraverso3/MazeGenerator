@@ -18,8 +18,15 @@ public class ImageGenerator
      */
     public BufferedImage mazeBW()
     {
-        int cellSize = size * 2 + 1;
-        BufferedImage img = new BufferedImage(maze.getWidth() * cellSize + 1, maze.getHeight() * cellSize + 1, BufferedImage.TYPE_BYTE_BINARY);
+        int cellSize = size * 2;
+        BufferedImage img = new BufferedImage(maze.getWidth() * cellSize+1, maze.getHeight() * cellSize+1, BufferedImage.TYPE_BYTE_BINARY);
+
+        //color the background white
+        Graphics2D g = img.createGraphics();
+        g.setColor(Color.WHITE);
+        g.fillRect(0, 0, img.getWidth(), img.getHeight());
+        g.dispose();
+
 
         drawMazeGrid(img);
         return img;
