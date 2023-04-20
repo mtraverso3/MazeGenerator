@@ -99,16 +99,17 @@ public class Maze
         double[] probabilites = new double[4];
         Arrays.fill(probabilites, 0.25);
 
-        if (current.getRow() == 0 || maze[current.getRow() - 1][current.getColumn()].isVisited()) {  //north checking
+
+        if (current.row() == 0 || maze[current.row() - 1][current.column()].isVisited()) {  //north checking
             probabilites[0] = 0;
         }
-        if (current.getColumn() == 0 || maze[current.getRow()][current.getColumn() - 1].isVisited()) { //west checking
+        if (current.column() == 0 || maze[current.row()][current.column() - 1].isVisited()) { //west checking
             probabilites[2] = 0;
         }
-        if (current.getRow() == height - 1 || maze[current.getRow() + 1][current.getColumn()].isVisited()) { //south checking
+        if (current.row() == height - 1 || maze[current.row() + 1][current.column()].isVisited()) { //south checking
             probabilites[1] = 0;
         }
-        if (current.getColumn() == width - 1 || maze[current.getRow()][current.getColumn() + 1].isVisited()) { //east checking
+        if (current.column() == width - 1 || maze[current.row()][current.column() + 1].isVisited()) { //east checking
             probabilites[3] = 0;
         }
 
@@ -150,7 +151,7 @@ public class Maze
 
     public Cell getCell(Coordinate coordinate)
     {
-        return maze[coordinate.getRow()][coordinate.getColumn()];
+        return maze[coordinate.row()][coordinate.column()];
     }
 
     public int getWidth()
