@@ -19,8 +19,6 @@ import java.awt.Image;
 /**
  * This utility class draws and scales an image to fit canvas of a component.
  * if the image is smaller than the canvas, it is kept as it is.
- *
- * @author www.codejava.net
  */
 public class ImageDrawer
 {
